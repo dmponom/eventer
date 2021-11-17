@@ -2,13 +2,12 @@ package httphandlers
 
 import (
 	httpServer "eventer/core/http-server"
-	"eventer/core/validators"
-
 	"eventer/core/logger"
+	"eventer/core/validators"
 	"go.uber.org/fx"
 )
 
-type HTTPMethods struct {
+type methods struct {
 	log       logger.Logger
 	validator validators.Validator
 }
@@ -17,7 +16,7 @@ func MakeHTTPHandlers(
 	log logger.Logger,
 	validator validators.Validator,
 ) httpServer.API {
-	return &HTTPMethods{
+	return &methods{
 		log:       log,
 		validator: validator,
 	}

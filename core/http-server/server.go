@@ -24,8 +24,8 @@ type server struct {
 
 func Make(
 	cfg *config.Config,
-	handlers API,
 	log logger.Logger,
+	handlers API,
 ) Server {
 	return &server{
 		log:      log,
@@ -61,6 +61,8 @@ func (s *server) Register() {
 		AllowCredentials: true,
 		MaxAge:           1000, // Maximum value not ignored by any of major browsers
 	}))
+
+	router.Get("/api/health-check", MakeHandlesChain(AppendTracingContext, s.handlers.HealthCheck))
 
 	s.server = &http.Server{
 		Addr:              fmt.Sprintf("%s:%d", s.host, s.port),

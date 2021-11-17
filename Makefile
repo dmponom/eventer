@@ -25,6 +25,6 @@ lint:
 	golangci-lint run
 
 just-run:
-	go run app.go "run-system"
+	go run app.go run-system
 
 run: install just-run
