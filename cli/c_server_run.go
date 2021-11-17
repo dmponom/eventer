@@ -6,7 +6,6 @@ import (
 	"eventer/core/logger"
 	"eventer/core/validators"
 	httpHandlers "eventer/handlers/http"
-
 	"flag"
 	"go.uber.org/fx"
 )
@@ -15,7 +14,7 @@ type runSystemCommand struct {
 	flagSet *flag.FlagSet
 }
 
-func MakeRunSystemCommand() *runSystemCommand {
+func MakeRunSystemCommand() Runner {
 	return &runSystemCommand{
 		flagSet: flag.NewFlagSet("run-system", flag.ContinueOnError),
 	}
@@ -37,6 +36,7 @@ func (cmd *runSystemCommand) Run() error {
 			validators.Module,
 			config.Module,
 			logger.Module,
+
 			httpHandlers.Module,
 			httpServer.Module,
 		),
